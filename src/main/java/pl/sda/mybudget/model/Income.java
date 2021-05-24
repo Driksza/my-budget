@@ -18,6 +18,7 @@ public class Income {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @Column(name = "nazwa") - nazwa inside database
     private Long id;
     private long amountInPolishGrosz;
     private LocalDate incomeDate;
