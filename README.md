@@ -4,6 +4,7 @@ This is my first budget project based on Java and Spring.
 - przed mergem/pull/przełączeniem branchy drzewo robocze powinno być czyste
 - usuwamy tylko branch na którym aktualnie się nie znajdujemy (nie podcina się nałęzi na której się siedzi:)
 - po mergu zawsze zweryfikujmy czy wszyskto działa (ale tylko jeśli musimy rozwiązywac konflikty)
+- zmergowany feature-branch można bezpiecznie usunąć
 
 ### Git - przydatne komendy
 git status - co się dzieje w repo
@@ -22,3 +23,15 @@ git remote -v - jw. + adresy
 Controller
 Service
 Repository
+
+### REST
+Create  - Post
+Read    - Get
+Update  - Patch (partial update), Put (whole update)
+Delete  - Delete
+
+### How to implement Rest
+1. Define @RestController
+2. Add @Service to controller (service has business logic:)) - use dependency injection
+3. Add JpaRepository to Service class if access to data source is necessary - use dependency injection
+4. Use correct Http methods

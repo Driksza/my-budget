@@ -1,11 +1,7 @@
 package pl.sda.mybudget.controller.rest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pl.sda.mybudget.model.Income;
-import pl.sda.mybudget.model.enumeration.IncomeType;
+import org.springframework.web.bind.annotation.*;
+import pl.sda.mybudget.dto.IncomeDto;
 import pl.sda.mybudget.service.IncomeService;
 
 import java.time.LocalDate;
@@ -15,26 +11,30 @@ import java.util.List;
 @RequestMapping("/rest/incomes")
 public class IncomeRestController {
 
-
     private final IncomeService incomeService;
 
-    public IncomeRestController(IncomeService incomeService) {
+    public IncomeRestController(final IncomeService incomeService) {
         this.incomeService = incomeService;
     }
 
+    // Select all
     @GetMapping
-    List<Income> getAllIncomes() {
-//        return List.of(
-//                new Income(1_000, LocalDate.now(), "Od żony:)", IncomeType.MOPS),
-//                new Income(5_00_000, LocalDate.now(), "500++", IncomeType.MOPS)
-//                );
-        return  incomeService.findAllIncomes();
-    }
-    // Select by id
-    // rest/incomes/1
-    @GetMapping("/{id}")
-    Income findbyId (@PathVariable("id") Long idik) {
-        return null;
+    List<IncomeDto> getAllIncomes() {
+        return incomeService.findAllIncomes();
     }
 
+    // Select by id
+    // /rest/incomes/1
+    // /rest/incomes/2
+    // /rest/incomes/n - id of income goes here
+    @GetMapping("/{id}")
+    IncomeDto findById(@PathVariable("id") Long idik) {
+        return incomeService.findIncomeById(idik);
+    }
+
+    // send json to save inside request body
+    @PostMapping
+    IncomeDto createNewIncome(@RequestBody IncomeDto incomeToSave) {
+        return incomeService.saveIncome(incomeToSave);
+    }
 }
